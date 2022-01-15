@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body,
+        html {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        #flex-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #echo-box {
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="flex-box">
+        <div id="echo-box"></div>
+        <div id="logo-box">
+            <img id="logo" src="logo.png" />
+        </div>
+    </div>
+
+    <script>
+        const logoElement = document.getElementById('logo');
+        const logoBox = document.getElementById('logo-box');
+        const echoBox = document.getElementById('echo-box');
+
+        function createEcho() {
+            const img = document.createElement('img');
+            img.src = logoElement.src;
+            img.style.position = 'absolute';
+            img.style.left = logoElement.offsetLeft + 'px';
+            img.style.top = logoElement.offsetTop + 'px';
+            return img;
+        }
+
+        const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+        function setRandomTranslate3d(target, xDeviance, yDeviance) {
+            const x = getRandomInt(-1 * xDeviance, xDeviance);
+            const y = getRandomInt(-1 * yDeviance, yDeviance);
+            target.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+
+        logoBox.addEventListener("mouseover", e => startJitter());
+        logoBox.addEventListener("mouseleave", e => stopJitter());
+
+        let echoInterval = null;
+        let fadeInterval = null;
+        let echoArray = [];
+
+        // The relevant variables
+        const delay = 10;
+        const count = 6;
+        const xDeviance = 100;
+        const yDeviance = 50;
+
+        function startJitter() {
+            if (echoInterval === null) {
+                echoInterval = setInterval(() => {
+                    const echo = createEcho();
+                    echoArray.push(echo);
+                    setRandomTranslate3d(echo, xDeviance, yDeviance);
+                    echoBox.append(echo);
+                }, delay);
+                if (fadeInterval === null) {
+                    setTimeout(() => {
+                        fadeInterval = setInterval(() => {
+                            if (echoArray.length) {
+                                echoArray.shift().remove();
+                            } else {
+                                clearInterval(fadeInterval);
+                                fadeInterval = null;
+                            }
+                        }, delay);
+                    }, delay * count)
+                }
+            }
+        }
+
+        function stopJitter() {
+            clearInterval(echoInterval);
+            echoInterval = null;
+        }
+    </script>
+</body>
+
+</html>

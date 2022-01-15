@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pear Factory!</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="particle.css">
+    <script src="index.js" defer></script>
+</head>
+
+<body ondragstart="return false;">
+    <div class="main">
+        <div class="image"><img id="pearPic" onclick="PearClickHandler(event);"></div>
+        <p class="info">Number of PEARS:</p>
+        <div class="numBox" id="pears"></div>
+        <div class="numBox" id="pearsPerClick"></div>
+        <div class="numBox" id="pearsPerSecond"></div>
+        <p class="info">Intructions: Click the PEAR!</p>
+    </div>
+    <div class="upgrades">
+        <div id="upgrade-container" class="scrollable"></div>
+    </div>
+</body>
+
+</html>
