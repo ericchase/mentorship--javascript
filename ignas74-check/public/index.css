@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.topic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_container nav {
+    display: flex;
+    list-style: none;
+    gap: 5px;
+}
+
+.paragraph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
